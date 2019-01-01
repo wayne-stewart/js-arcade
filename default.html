@@ -1,8 +1,27 @@
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Arcade</title>
+    <style>
+        * {
+            padding:0px;
+            margin:0px;
+        }
+        canvas {
+            width:100%;
+            height:100%;
+        }
+    </style>
 </head>
 <body>
-
+    <canvas></canvas>
 </body>
+<script src="js/extensions.js"></script>
+<script src="js/require.js"></script>
+<script>
+    require.config({
+        baseUrl: "js"
+    });
+</script>
+<script src="js/bootstrap.js"></script>
 </html>
