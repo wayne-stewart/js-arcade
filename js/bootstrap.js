@@ -11,10 +11,10 @@
             var canvas = new Canvas("canvas");
             canvas.matchResolution();
             var led = new LedMatrix(canvas, 
-                {x:50, y:50, w:(200 * 90 / 16), h:200 }, 
-                {w:90, h:16});
+                {x:50, y:50, w:(200 * 60 / 16), h:200 }, 
+                {w:60, h:16});
             led.pixelSize = 0.8;
-            led.setText("courier", "Arcade");
+            led.setText("Verdana", "JS Arcade");
             led.render();
         });
         requestAnimationFrame(frameRequestCallback);
