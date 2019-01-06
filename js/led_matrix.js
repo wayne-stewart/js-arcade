@@ -5,16 +5,16 @@ define([], function() {
         var outputData = new Uint8ClampedArray(inputData.length / 4);
         for(var i = 0; i < outputData.length; i++) {
             outputData[i] = 
-                0.2989 * inputData[i*4] + 
-                0.5870 * inputData[i*4+1] + 
-                0.1140 * inputData[i*4+2];
+                (0.2989 * inputData[i*4]) + 
+                (0.5870 * inputData[i*4+1]) + 
+                (0.1140 * inputData[i*4+2]);
         }
         return outputData;
     };
 
     var getPixel = function(data, dataIndex, dataSize, displayIndex, x, y) {
-        var dataX = dataIndex + x;
-        var dataY = dataIndex + y;
+        var dataX = Math.floor(dataIndex) + x;
+        var dataY = y; // Math.floor(dataIndex) + y;
         if (dataX >= dataSize.width) return 0;
         if (dataY >= dataSize.height) return 0;
         if (displayIndex > x) return 0;
@@ -96,6 +96,24 @@ define([], function() {
             width: imageData.width, 
             height: imageData.height 
         };
+    };
+
+    LedMatrix.prototype.setTextAnimation = function(type, speed) {
+        this.textAnimation = type;
+        this.textAnimationSpeed = speed;
+        this.direction = 1;
+    };
+
+    LedMatrix.prototype.update = function(elapsed) {
+        var dataWidth = this.ledPixelData.width;
+        var displayWidth = this.res.w;
+        if (dataWidth > displayWidth) {
+            var maxOffset = dataWidth - displayWidth;
+            this.dataIndex += (this.textAnimationSpeed * elapsed * this.direction);
+            if (Math.abs(this.dataIndex) >= maxOffset || this.dataIndex <= 0) {
+                this.direction *= -1;
+            }
+        }
     };
 
     return LedMatrix;
