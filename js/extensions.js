@@ -1,37 +1,6 @@
 
 (function(global) {
 
-    global.$hasOwn = function(obj, propertyName) {
-        if (obj) {
-            return obj.hasOwnProperty(propertyName);
-        }
-        return false;
-    };
-
-    global.$get = function(id) {
-        return document.getElementById(id);
-    };
-
-    global.$find = function(selector) {
-        return document.querySelector(selector);
-    };
-
-    global.$findAll = function(selector) {
-        return document.querySelectorAll(selector);
-    };
-
-    global.$createElement = function(tagName) {
-        return document.createElement(tagName);
-    };
-
-    global.$addEvent = function(el, eventName, eventCallback) {
-        el.addEventListener(eventName, eventCallback);
-    };
-
-    global.$removeEvent = function(el, eventName, eventCallback) {
-        el.removeEventListener(eventName, eventCallback);
-    };
-
     /*
         Remove element(s) from an array
 

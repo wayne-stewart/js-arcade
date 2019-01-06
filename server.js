@@ -9,7 +9,7 @@ var handleRequest = function(request, response) {
     var queryIndex = request.url.indexOf("?");
     var path;
     var query;
-    if (queryIndex > 0) {
+    if (queryIndex >= 0) {
         path = request.url.substring(0, queryIndex);
         query = request.url.substring(queryIndex);
     } else {
