@@ -11,9 +11,10 @@
             var canvas = new Canvas("canvas");
             canvas.matchResolution();
             var led = new LedMatrix(canvas, 
-                {x:50, y:50, w:600, h:150 }, 
-                {w:60, h:15});
-            led.pixelSize = 0.75;
+                {x:50, y:50, w:(200 * 90 / 16), h:200 }, 
+                {w:90, h:16});
+            led.pixelSize = 0.8;
+            led.setText("courier", "Arcade");
             led.render();
         });
         requestAnimationFrame(frameRequestCallback);
