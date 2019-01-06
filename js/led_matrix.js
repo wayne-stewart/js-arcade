@@ -110,8 +110,13 @@ define([], function() {
         if (dataWidth > displayWidth) {
             var maxOffset = dataWidth - displayWidth;
             this.dataIndex += (this.textAnimationSpeed * elapsed * this.direction);
-            if (Math.abs(this.dataIndex) >= maxOffset || this.dataIndex <= 0) {
+            if (this.dataIndex >= maxOffset) {
+                this.dataIndex = maxOffset;
                 this.direction *= -1;
+            }
+            else if (this.dataIndex <= 0) {
+                this.dataIndex = 0;
+                this.direction *= -1
             }
         }
     };
