@@ -16,7 +16,7 @@ define([], function() {
     };
 
     Canvas.prototype.getResolution = function() {
-        return { width: this.el.width, height: this.el.width };
+        return { width: this.el.width, height: this.el.height };
     };
 
     /* 

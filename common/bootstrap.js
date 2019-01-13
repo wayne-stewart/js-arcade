@@ -7,29 +7,42 @@
 (function(global) {
 
     var _led = null;
+    var _mainMenu = null;
     var _timestamp = 0;
 
     window.addEventListener("resize", function() {
         console.log("resized");
     });
 
-    require(["common/canvas", "common/led_matrix"], function(Canvas, LedMatrix) {
-        var canvas = new Canvas("canvas");
-        canvas.matchResolution();
-        var res = canvas.getResolution();
-        var led = new LedMatrix(canvas, 
-            {x:0, y:0, w:res.width, h:(res.height * 0.1) }, 
-            {w:16 * res.width / (res.height * 0.1), h:16});
+    require(["common/canvas", "common/led_matrix", "common/mainmenu", "common/rect"], 
+        function(Canvas, LedMatrix, MainMenu, Rect) {
+
+        var cvs_banner = new Canvas("#cvs_banner");
+        cvs_banner.matchResolution();
+
+        var res = cvs_banner.getResolution();
+        var led = new LedMatrix(cvs_banner, 
+            new Rect(0, 0, res.width, res.height), 
+            {w:16 * res.width / res.height, h:16});
         led.pixelSize = 0.8;
-        led.setText("verdana", "Welcome to the Arcade");
+        led.setText("verdana", "Arcade");
         led.setTextAnimation("bounce", 0.0125);
+        led.setJustification("center");
         _led = led;
+
+        // var mainMenu = new MainMenu(canvas, 
+        //     new Rect(0, led.rect.bottom, res.width, res.height - led.rect.height));
+        // _mainMenu = mainMenu;
+
         requestAnimationFrame(frameRequestCallback);
     });
 
     let frameRequestCallback = function(timestamp) {
-        _led.update(timestamp - _timestamp);
+        var elapsed = timestamp - _timestamp;
+        _led.update(elapsed);
         _led.render();
+        // _mainMenu.update(elapsed);
+        // _mainMenu.render();
         _timestamp = timestamp;
         requestAnimationFrame(frameRequestCallback);
     };
